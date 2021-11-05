@@ -1,31 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MFSEngine.Logic;
+using MFSEngine.Models;
 
 namespace MFSEngine
 {
     class MFSOutput
     {
-        private LinkedList<int> mutualFriends;
-        BFS _bfs;
-        public MFSOutput(BFS bFS)
+        ITraversal _bfs;
+        public MFSOutput(ITraversal bFS)
         {
-            
-            mutualFriends = bFS!=null ? bFS._mutualFriends: throw new NullReferenceException();
             this._bfs = bFS;
         }
 
-        public void mutualFriendsList(int s, Dictionary<int, Person> people)
+        public void mutualFriendsList(MFSGraph connections, int searchItem)
         {
-
-            _bfs.BFSTraversal(s);
-            foreach (var item in mutualFriends)
+            foreach (var item in _bfs.Traverse(connections, searchItem))
             {
                 Console.Write(item + " ");
             }
-
         }
     }
 }
